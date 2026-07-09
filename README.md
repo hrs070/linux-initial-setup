@@ -2,28 +2,30 @@
 This repo contains initial setup guide to make linux work and look like macos.
 
 
-Update the system
+## Update the system
 `sudo dnf update`
 `sudo dnf upgrade`
 
-Backup
+## Backup
 `sudo dnf install snapper btrfs-assistant snapper-timeline-service`
 // TODO
 
-Enable rpm fusion repo
+## Enable rpm fusion repo
 `sudo dnf install https://rpmfusion.org(rpm -E %fedora).noarch.rpm https://rpmfusion.org(rpm -E %fedora).noarch.rpm`
 
-Install Multimedia Codecs
+## Install Multimedia Codecs
 `sudo dnf swap ffmpeg-free ffmpeg --allowerasing`
 `sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin`
 `sudo dnf groupupdate sound-and-video`
 
-Optimize DNF Package Manager
+## Optimize DNF Package Manager
 `sudo nano /etc/dnf/dnf.conf`
+```
 max_parallel_downloads=10
 fastestmirror=True
+```
 
-Keymap
+## Keymap
 `sudo dnf copr enable alternateved/keyd`
 `sudo dnf install keyd`
 `sudo dnf copr disable alternateved/keyd`
@@ -83,23 +85,21 @@ backspace = C-backspace
 `gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "['<Alt><Shift>Left']"`
 `gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "['<Alt><Shift>Right']"`
 
+## Theme
+-  `https://github.com/vinceliuice/WhiteSur-gtk-theme`
+-  `https://github.com/vinceliuice/WhiteSur-icon-theme`
 
-
-Theme
-https://github.com/vinceliuice/WhiteSur-gtk-theme
-https://github.com/vinceliuice/WhiteSur-icon-theme
-
-Extensions
-Extension manager - mathew jakeman
-Refine
-Tweaks
-AppIndicator and KStatusNotifierItem Support
-Blur my Shell
-Caffeine
-Copyous
-Dash to Dock
-Just Perfection
-Logo Menu
-Search Light
-User Themes
+## Extensions
+-  Extension manager - mathew jakeman
+-  Refine
+-  Tweaks
+-  AppIndicator and KStatusNotifierItem Support
+-  Blur my Shell
+-  Caffeine
+-  Copyous
+-  Dash to Dock
+-  Just Perfection
+-  Logo Menu
+-  Search Light
+-  User Themes
 
