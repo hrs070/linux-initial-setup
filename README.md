@@ -29,7 +29,7 @@ Keymap
 `sudo dnf copr disable alternateved/keyd`
 `sudo nano /etc/keyd/default.conf`
 
-[ids]
+```[ids]
 *
 
 [main]
@@ -71,6 +71,7 @@ backspace = C-backspace
 left = C-left
 right = C-right
 backspace = C-backspace
+```
 
 `sudo keyd reload`
 
