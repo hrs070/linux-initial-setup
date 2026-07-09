@@ -29,7 +29,8 @@ Keymap
 `sudo dnf copr disable alternateved/keyd`
 `sudo nano /etc/keyd/default.conf`
 
-```[ids]
+```
+[ids]
 *
 
 [main]
