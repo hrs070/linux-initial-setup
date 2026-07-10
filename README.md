@@ -110,3 +110,4 @@ backspace = C-backspace
 -  Search Light
 -  User Themes
 
+# ZRAM configure
