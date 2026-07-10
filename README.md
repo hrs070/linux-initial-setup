@@ -110,4 +110,8 @@ backspace = C-backspace
 -  Search Light
 -  User Themes
 
+## Apps
+-  Flatseal
+
+
 ## ZRAM configure
