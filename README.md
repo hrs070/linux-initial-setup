@@ -121,6 +121,8 @@ backspace = C-backspace
 -  mozilla vpn
 -  bit torrent
 -  vlc
-  
+
+## AI Tools and repos
+-  Video2QS
 
 ## ZRAM configure
