@@ -10,6 +10,9 @@ This repo contains initial setup guide to make linux work and look like macos.
 `sudo dnf install snapper btrfs-assistant snapper-timeline-service`
 // TODO
 
+## Tailscale
+//todo
+
 ## Enable rpm fusion repo
 `sudo dnf install https://rpmfusion.org(rpm -E %fedora).noarch.rpm https://rpmfusion.org(rpm -E %fedora).noarch.rpm`
 
