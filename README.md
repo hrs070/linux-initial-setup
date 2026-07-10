@@ -112,6 +112,15 @@ backspace = C-backspace
 
 ## Apps
 -  Flatseal
-
+-  Tailscale
+-  Steam
+-  Lutris
+-  Bottles
+-  Winboat
+-  Sunshine/moonlight
+-  mozilla vpn
+-  bit torrent
+-  vlc
+  
 
 ## ZRAM configure
