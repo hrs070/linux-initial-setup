@@ -7,8 +7,12 @@ This repo contains initial setup guide to make linux work and look like macos.
 `sudo dnf upgrade`
 
 ## Backup
-`sudo dnf install snapper btrfs-assistant snapper-timeline-service`
-// TODO
+`sudo dnf install timeshift`
+Launch timeshift GUI
+Select rsync
+Select auto backup schedule or uncheck for manual
+Exclude all user directories
+Finish
 
 ## Tailscale
 //todo
