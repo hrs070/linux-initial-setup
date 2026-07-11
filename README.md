@@ -1,5 +1,5 @@
-# linux-initial-setup
-This repo contains initial setup guide to make linux work and look like macos.
+# fedora-quick-setup
+This repo is meant to help me setup fedora quickly
 
 
 ## Optimize DNF Package Manager
@@ -10,71 +10,71 @@ fastestmirror=True
 ```
 
 ## Update the system
-`sudo dnf update`
-`sudo dnf upgrade`
+-  `sudo dnf update`
+-  `sudo dnf upgrade`
 
-## Backup
-`sudo dnf install timeshift`
-Launch timeshift GUI
-Select rsync
-Select auto backup schedule or uncheck for manual
-Exclude all user directories
-Finish
-
-## Tailscale
-//todo
-
-## Enable rpm fusion repo
-`sudo dnf install https://rpmfusion.org(rpm -E %fedora).noarch.rpm https://rpmfusion.org(rpm -E %fedora).noarch.rpm`
-
-## Setup GPU
-`sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda`
-`sudo dnf install libva-nvidia-driver libva-utils`
-`sudo dnf config-manager setopt cuda-fedora43-$(uname -m).exclude=nvidia-driver,nvidia-modprobe,nvidia-persistenced,nvidia-settings,nvidia-libXNVCtrl,nvidia-xconfig`
-`sudo dnf config-manager setopt cuda-fedora43-$(uname -m).exclude=nvidia-driver,nvidia-modprobe,nvidia-persistenced,nvidia-settings,nvidia-libXNVCtrl,nvidia-xconfig`
-`sudo dnf clean all`
-`sudo dnf install cuda-toolkit`
-`echo 'export PATH=/usr/local/cuda-13.2/bin${PATH:+:${PATH}}' >> ~/.bashrc`
-`echo 'export LD_LIBRARY_PATH=/usr/local/cuda-13.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.bashrc`
-`source ~/.bashrc`
-`nvcc --version`
-
-## Install Multimedia Codecs
-`sudo dnf swap ffmpeg-free ffmpeg --allowerasing`
-`sudo dnf upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin`
-`sudo dnf groupupdate sound-and-video`
-
-# Setup Terminal
+## Setup Terminal
 [Link for steps](https://linuxcapable.com/how-to-install-zsh-on-fedora-linux/)
 
-`sudo dnf install`
-`nano ~/.zshrc`
-`git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"`
-`zsh`
-`chsh -s "$(command -v zsh)"`
-`
+-  `sudo dnf install zsh`
+-  `nano ~/.zshrc`
+-  `git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"`
+-  `zsh`
+-  `chsh -s "$(command -v zsh)"`
+-
+  `
 if [ -f ~/.shell_aliases ]; then
   source ~/.shell_aliases
 fi
 `
-`sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
-`test -d ~/.oh-my-zsh && echo "Oh My Zsh installed"`
-`git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"`
-`git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"`
-In ~/.zshrc, add this `plugins=(git zsh-autosuggestions zsh-syntax-highlighting)`
-`ZSH_THEME="powerlevel10k/powerlevel10k"`
-`source ~/.zshrc`
-`p10k configure`
-`echo 'export PATH=/usr/local/cuda-13.2/bin${PATH:+:${PATH}}' >> ~/.zshrc`
-`echo 'export LD_LIBRARY_PATH=/usr/local/cuda-13.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.zshrc`
+-  `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+-  `test -d ~/.oh-my-zsh && echo "Oh My Zsh installed"`
+-  `git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"`
+-  `git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"`
+-  In ~/.zshrc, add this `plugins=(git zsh-autosuggestions zsh-syntax-highlighting)`
+-  In ~/.zshrc, add this `ZSH_THEME="powerlevel10k/powerlevel10k"`
+-  `source ~/.zshrc`
+-  `p10k configure`
 
+## Backup
+-  `sudo dnf install timeshift`
+-  Launch timeshift GUI
+-  Select rsync
+-  Select auto backup schedule or uncheck for manual
+-  Exclude all user directories
+-  Finish
+
+## Enable rpm fusion repo
+-  `sudo dnf install https://rpmfusion.org(rpm -E %fedora).noarch.rpm https://rpmfusion.org(rpm -E %fedora).noarch.rpm`
+
+## Setup NVIDIA GPU
+-  `sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda`
+-  `sudo dnf install libva-nvidia-driver libva-utils`
+-  `sudo dnf config-manager setopt cuda-fedora43-$(uname -m).exclude=nvidia-driver,nvidia-modprobe,nvidia-persistenced,nvidia-settings,nvidia-libXNVCtrl,nvidia-xconfig`
+-  `sudo dnf clean all`
+-  `sudo dnf install cuda-toolkit`
+-  `echo 'export PATH=/usr/local/cuda-13.2/bin${PATH:+:${PATH}}' >> ~/.zshrc`
+-  `echo 'export LD_LIBRARY_PATH=/usr/local/cuda-13.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.zshrc`
+-  `source ~/.bashrc`
+-  `nvcc --version`
+
+## Install Multimedia Codecs
+-  `sudo dnf swap ffmpeg-free ffmpeg --allowerasing`
+-  `sudo dnf upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin`
+-  `sudo dnf groupupdate sound-and-video`
+
+## Fix Video preview
+-  `sudo mkdir -p /etc/environment.d/`
+-  `sudo nano /etc/environment.d/99-gtk-opengl.conf`
+-  Add this `GDK_GL=gles`
+-  Save file
 
 ## Keymap
-`sudo dnf copr enable alternateved/keyd`
-`sudo dnf install keyd`
-`sudo dnf copr disable alternateved/keyd`
-`sudo nano /etc/keyd/default.conf`
-
+-  `sudo dnf copr enable alternateved/keyd`
+-  `sudo dnf install keyd`
+-  `sudo dnf copr disable alternateved/keyd`
+-  `sudo nano /etc/keyd/default.conf`
+-  
 ```
 [ids]
 *
@@ -119,25 +119,19 @@ left = C-left
 right = C-right
 backspace = C-backspace
 ```
+-  `sudo keyd reload`
 
-`sudo keyd reload`
-
-`gsettings set org.gnome.shell.keybindings toggle-overview "['<Alt>Up']"`
-`gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "['<Control>space']"`
-`gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Alt>Left']"`
-`gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Alt>Right']"`
-`gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "['<Alt><Shift>Left']"`
-`gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "['<Alt><Shift>Right']"`
+-  `gsettings set org.gnome.shell.keybindings toggle-overview "['<Alt>Up']"`
+-  `gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "['<Control>space']"`
+-  `gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Alt>Left']"`
+-  `gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Alt>Right']"`
+-  `gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "['<Alt><Shift>Left']"`
+-  `gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "['<Alt><Shift>Right']"`
 
 ## Theme
 -  `https://github.com/vinceliuice/WhiteSur-gtk-theme`
 -  `https://github.com/vinceliuice/WhiteSur-icon-theme`
 
-## Fix Video preview
-`sudo mkdir -p /etc/environment.d/`
-`sudo nano /etc/environment.d/99-gtk-opengl.conf`
-Add this `GDK_GL=gles`
-Save file
 
 ## Extensions
 -  Extension manager - mathew jakeman
@@ -161,7 +155,7 @@ Save file
 -  Bottles
 -  Winboat
 -  Sunshine/moonlight
--  mozilla vpn
+-  Proton vpn
 -  bit torrent
 -  vlc
 
