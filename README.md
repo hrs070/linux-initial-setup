@@ -96,6 +96,12 @@ backspace = C-backspace
 -  `https://github.com/vinceliuice/WhiteSur-gtk-theme`
 -  `https://github.com/vinceliuice/WhiteSur-icon-theme`
 
+## Fix Video preview
+`sudo mkdir -p /etc/environment.d/`
+`sudo nano /etc/environment.d/99-gtk-opengl.conf`
+Add this `GDK_GL=gles`
+Save file
+
 ## Extensions
 -  Extension manager - mathew jakeman
 -  Refine
