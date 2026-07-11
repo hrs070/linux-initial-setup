@@ -169,3 +169,15 @@ Save file
 -  Video2QS
 
 ## ZRAM configure
+
+## systemctl commands
+-  systemctl status bluetooth (any service name)
+-  sudo systemctl stop bluetooth    # Kills the bluetooth service immediately
+-  sudo systemctl start bluetooth   # Launches it back up right now
+-  sudo systemctl restart bluetooth # Hard stop and fresh reboot of the service
+-  sudo systemctl disable bluetooth  # Prevents it from launching at next boot
+-  sudo systemctl enable bluetooth   # Tells systemd to auto-launch it at next boot
+-  systemctl list-unit-files --type=service --state=enabled
+-  systemctl list-units --type=service --state=running
+-  systemctl --failed
+-  systemctl list-units --type=service --state=not-found
