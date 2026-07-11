@@ -44,6 +44,30 @@ Finish
 `sudo dnf upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin`
 `sudo dnf groupupdate sound-and-video`
 
+# Setup Terminal
+[Link for steps](https://linuxcapable.com/how-to-install-zsh-on-fedora-linux/)
+
+`sudo dnf install`
+`nano ~/.zshrc`
+`git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"`
+`zsh`
+`chsh -s "$(command -v zsh)"`
+`
+if [ -f ~/.shell_aliases ]; then
+  source ~/.shell_aliases
+fi
+`
+`sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+`test -d ~/.oh-my-zsh && echo "Oh My Zsh installed"`
+`git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"`
+`git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"`
+In ~/.zshrc, add this `plugins=(git zsh-autosuggestions zsh-syntax-highlighting)`
+`ZSH_THEME="powerlevel10k/powerlevel10k"`
+`source ~/.zshrc`
+`p10k configure`
+`export PATH=/usr/local/cuda-13.2/bin:$PATH`
+`export LD_LIBRARY_PATH=/usr/local/cuda-13.2/lib64:$LD_LIBRARY_PATH`
+
 
 ## Keymap
 `sudo dnf copr enable alternateved/keyd`
