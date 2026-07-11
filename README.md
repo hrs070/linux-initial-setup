@@ -34,6 +34,10 @@ Finish
 `sudo dnf config-manager setopt cuda-fedora43-$(uname -m).exclude=nvidia-driver,nvidia-modprobe,nvidia-persistenced,nvidia-settings,nvidia-libXNVCtrl,nvidia-xconfig`
 `sudo dnf clean all`
 `sudo dnf install cuda-toolkit`
+`echo 'export PATH=/usr/local/cuda-13.2/bin${PATH:+:${PATH}}' >> ~/.bashrc`
+`echo 'export LD_LIBRARY_PATH=/usr/local/cuda-13.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.bashrc`
+`source ~/.bashrc`
+`nvcc --version`
 
 ## Install Multimedia Codecs
 `sudo dnf swap ffmpeg-free ffmpeg --allowerasing`
