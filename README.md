@@ -30,6 +30,9 @@ Finish
 ## Setup GPU
 `sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda`
 `sudo dnf install libva-nvidia-driver libva-utils`
+`sudo dnf config-manager setopt cuda-fedora43-$(uname -m).exclude=nvidia-driver,nvidia-modprobe,nvidia-persistenced,nvidia-settings,nvidia-libXNVCtrl,nvidia-xconfig`
+`sudo dnf config-manager setopt cuda-fedora43-$(uname -m).exclude=nvidia-driver,nvidia-modprobe,nvidia-persistenced,nvidia-settings,nvidia-libXNVCtrl,nvidia-xconfig`
+`sudo dnf clean all`
 `sudo dnf install cuda-toolkit`
 
 ## Install Multimedia Codecs
