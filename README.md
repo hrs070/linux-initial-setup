@@ -194,6 +194,25 @@ compression-algorithm = zstd
 - `sudo systemctl daemon-reload` # Force systemd to read the updated text file
 - `sudo systemctl restart systemd-zram-setup@zram0.service` # Restart the service to recreate the virtual drive with your new sizes
 
+## SSD swapfile
+1.  Allocate a fixed, unfragmented file on your SSD (e.g., 64 Gigabytes)
+  `sudo fallocate -l 64G /swapfile`
+2. Lock permissions so only the root system can read/write to it (Crucial for security)
+  `sudo chmod 600 /swapfile`
+3. Format the blank file into a Linux Swap filesystem
+  `sudo mkswap /swapfile`
+4. Instantly activate it alongside your existing memory layout
+  `sudo swapon /swapfile`
+5. Verify It Is Working
+   `swapon --show`
+6. Make It Permanent
+   `sudo bash -c 'echo "/swapfile none swap defaults 0 0" >> /etc/fstab'`
+7. Safely deactivate the swapfile (this moves any cached data back to RAM)
+   `sudo swapoff /swapfile`
+8. Delete the physical file from your SSD
+   `sudo rm /swapfile`
+9. Clean the registry file
+    `sudo nano /etc/fstab`
 
 
 ## systemctl commands
