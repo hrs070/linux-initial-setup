@@ -2,6 +2,13 @@
 This repo contains initial setup guide to make linux work and look like macos.
 
 
+## Optimize DNF Package Manager
+`sudo nano /etc/dnf/dnf.conf`
+```
+max_parallel_downloads=10
+fastestmirror=True
+```
+
 ## Update the system
 `sudo dnf update`
 `sudo dnf upgrade`
@@ -20,17 +27,16 @@ Finish
 ## Enable rpm fusion repo
 `sudo dnf install https://rpmfusion.org(rpm -E %fedora).noarch.rpm https://rpmfusion.org(rpm -E %fedora).noarch.rpm`
 
+## Setup GPU
+`sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda`
+`sudo dnf install libva-nvidia-driver libva-utils`
+`sudo dnf install cuda-toolkit`
+
 ## Install Multimedia Codecs
 `sudo dnf swap ffmpeg-free ffmpeg --allowerasing`
-`sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin`
+`sudo dnf upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin`
 `sudo dnf groupupdate sound-and-video`
 
-## Optimize DNF Package Manager
-`sudo nano /etc/dnf/dnf.conf`
-```
-max_parallel_downloads=10
-fastestmirror=True
-```
 
 ## Keymap
 `sudo dnf copr enable alternateved/keyd`
