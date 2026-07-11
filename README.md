@@ -65,8 +65,8 @@ In ~/.zshrc, add this `plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 `ZSH_THEME="powerlevel10k/powerlevel10k"`
 `source ~/.zshrc`
 `p10k configure`
-`export PATH=/usr/local/cuda-13.2/bin:$PATH`
-`export LD_LIBRARY_PATH=/usr/local/cuda-13.2/lib64:$LD_LIBRARY_PATH`
+`echo 'export PATH=/usr/local/cuda-13.2/bin${PATH:+:${PATH}}' >> ~/.zshrc`
+`echo 'export LD_LIBRARY_PATH=/usr/local/cuda-13.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.zshrc`
 
 
 ## Keymap
