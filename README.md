@@ -213,6 +213,8 @@ compression-algorithm = zstd
    `sudo rm /swapfile`
 9. Clean the registry file
     `sudo nano /etc/fstab`
+10. Find the line and completely delete that single line that says
+    `/swapfile none swap defaults 0 0`
 
 
 ## systemctl commands
