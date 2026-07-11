@@ -169,15 +169,41 @@ Save file
 -  Video2QS
 
 ## ZRAM configure
+-  `swapon --show`
+-  `zramctl`
+-  `free -h`
+-  `sudo swapoff /dev/zram0`  # Instantly stop the active zRAM swap partition in memory
+-  `sudo systemctl stop systemd-zram-setup@zram0.service` # Stop and disable the background service that creates it
+-  `sudo systemctl start systemd-zram-setup@zram0.service` # Start the generator service to rebuild the drive
+-  `sudo nano /usr/lib/systemd/zram-generator.conf`
+-
+```
+   [zram0]
+# TRY VARIATION A: Set it to 100% of your RAM (32GB)
+zram-size = ram
+
+# TRY VARIATION B: Hardcode it to a specific size (e.g., 4G, 8G, 16G)
+# zram-size = 16384
+
+# TRY VARIATION C: Match your current stock setup (8GB)
+# zram-size = 8192
+
+# THE ALGORITHM DIAL: Test 'zstd' (tight compression) vs 'lzo-rle' (raw speed)
+compression-algorithm = zstd
+```
+- `sudo systemctl daemon-reload` # Force systemd to read the updated text file
+- `sudo systemctl restart systemd-zram-setup@zram0.service` # Restart the service to recreate the virtual drive with your new sizes
+
+
 
 ## systemctl commands
--  systemctl status bluetooth (any service name)
--  sudo systemctl stop bluetooth    # Kills the bluetooth service immediately
--  sudo systemctl start bluetooth   # Launches it back up right now
--  sudo systemctl restart bluetooth # Hard stop and fresh reboot of the service
--  sudo systemctl disable bluetooth  # Prevents it from launching at next boot
--  sudo systemctl enable bluetooth   # Tells systemd to auto-launch it at next boot
--  systemctl list-unit-files --type=service --state=enabled
--  systemctl list-units --type=service --state=running
--  systemctl --failed
--  systemctl list-units --type=service --state=not-found
+-  `systemctl status bluetooth` (any service name)
+-  `sudo systemctl stop bluetooth`    # Kills the bluetooth service immediately
+-  `sudo systemctl start bluetooth`   # Launches it back up right now
+-  `sudo systemctl restart bluetooth` # Hard stop and fresh reboot of the service
+-  `sudo systemctl disable bluetooth`  # Prevents it from launching at next boot
+-  `sudo systemctl enable bluetooth`   # Tells systemd to auto-launch it at next boot
+-  `systemctl list-unit-files --type=service --state=enabled`
+-  `systemctl list-units --type=service --state=running`
+-  `systemctl --failed`
+-  `systemctl list-units --type=service --state=not-found`
