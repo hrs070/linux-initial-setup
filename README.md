@@ -222,3 +222,11 @@ compression-algorithm = zstd
 -  `systemctl list-units --type=service --state=running`
 -  `systemctl --failed`
 -  `systemctl list-units --type=service --state=not-found`
+
+
+## //TODO
+-  winboat vs bottles vs gnome boxes
+-  gsconnect / kdeconnect
+-  steam setup
+-  gui for systemctl, firewall: gufw ?
+-  rdp, tailscale
