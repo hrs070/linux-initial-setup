@@ -150,6 +150,8 @@ backspace = C-backspace
 ## Apps
 -  Flatseal
 -  Tailscale
+-  Trayscale
+-  Firewall configuration
 -  Steam
 -  Lutris
 -  Bottles
@@ -225,8 +227,7 @@ compression-algorithm = zstd
 
 
 ## //TODO
--  winboat vs bottles vs gnome boxes
 -  gsconnect / kdeconnect
 -  steam setup
 -  gui for systemctl, firewall: gufw ?
--  rdp, tailscale
+-  rdp
