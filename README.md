@@ -1,7 +1,6 @@
 # fedora-quick-setup
 This repo is meant to help me setup fedora quickly
 
-
 ## Optimize DNF Package Manager
 `sudo nano /etc/dnf/dnf.conf`
 ```
@@ -235,6 +234,11 @@ backspace = C-backspace
   23. Forces a structural restart of the servers to read any profile changes `sudo systemctl restart smb nmb`
   24. Check the active status of the server if troubleshooting execution `sudo systemctl status smb`
 
+## Remote Login
+  1. Enable from settings.
+  2. Create a username,password
+  3. On Client (Windows App), enter the IP of linux machine.
+  4. When entering username, enter `.\{username}` and `password`
 
 ## AI Tools and repos
 -  Video2QS
@@ -286,7 +290,6 @@ compression-algorithm = zstd
     `sudo nano /etc/fstab`
 10. Find the line and completely delete that single line that says
     `/swapfile none swap defaults 0 0`
-
 
 ## systemctl commands
 -  `systemctl status bluetooth` (any service name)
