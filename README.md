@@ -245,6 +245,10 @@ backspace = C-backspace
   8. Change the 0 to a 1 so it reads exactly like this: `use redirection server name:i:1`
   9. Save the file and close the text editor.
 
+## SSH
+  1. Enable SSH from settings.
+  2. To login, use user@ip and password and add ssh config
+
 ## AI Tools and repos
 -  Video2QS
 
