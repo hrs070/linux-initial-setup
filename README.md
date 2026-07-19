@@ -161,6 +161,81 @@ backspace = C-backspace
 -  bit torrent
 -  vlc
 
+## SMB setup
+  1. Returns your local network IP (e.g., 192.168.1.15) for home devices `ip route get 1.1.1.1 | awk '{print $7}'`
+  2. ip route get 1.1.1.1 | awk '{print $7}' `tailscale ip -4`
+  3. Returns your exact local Wi-Fi interface name if needed for troubleshooting `ip route show default | awk '{print $5}'`
+  4. Creates the dedicated directory you want to share (Change "SharedFolder" to your liking) `mkdir -p /home/$USER/SharedFolder`
+  5. Installs the clean, required Samba binaries `sudo dnf install samba samba-client -y`
+  6. Create a dedicated system access group for sharing `sudo groupadd smbgroup`
+  7. Add your primary account to the sharing group `sudo usermod -aG smbgroup $USER`
+  8. Create a second account without local desktop login privileges (Change "shareuser" to your liking) `sudo useradd -M -s /sbin/nologin shareuser`
+  9. Add the second account to the sharing group (Match the username chosen in the step above) `sudo usermod -aG smbgroup shareuser`
+  10. Sets folder owner to you and group to smbgroup (Match your folder name) `sudo chown -R ${USER}:smbgroup /home/$USER/SharedFolder`
+  11. Restricts access exclusively to you and group members (Match your folder name) `sudo chmod -R 2770 /home/$USER/SharedFolder`
+  12. Grants parent directory traversal access so the Samba service can pass through the home root gate `sudo chmod o+x /home/${USER}`
+  13. Adds a persistent rule to the central SELinux database allowing Samba to access this folder tree `sudo semanage fcontext -a -t samba_share_t "/home/${USER}/SharedFolder(/.*)?"`
+  14. Actively applies the new security context label to the file system `sudo restorecon -R -v /home/${USER}/SharedFolder`
+  15. Set the network connection password for your primary account `sudo smbpasswd -a $USER`
+  16. Set the network connection password for the secondary account (Match your secondary username) `sudo smbpasswd -a shareuser`
+  17. `sudo nano /etc/samba/smb.conf`
+  18. 
+```
+[global]
+    # Default Windows network grouping profile
+    workgroup = WORKGROUP
+    
+    # Visual name displayed on network browsers
+    server string = Fedora Samba Server
+    
+    # Forces credential-based authentication instead of anonymous guest access
+    security = user
+    
+    # Required so Samba adapts to Tailscale's dynamic virtual interfaces
+    bind interfaces only = no
+
+    # Protocol enforcement for modern security (Blocks legacy, vulnerable SMBv1/v2)
+    server min protocol = SMB3
+    server max protocol = SMB3
+
+    # Local IP & Tailscale IP security layer (Defense-in-Depth)
+    # Adjust 192.168.1.0/24 if your local router uses a different subnet (e.g., 192.168.0.0/24)
+    hosts allow = 127.0.0.1 192.168.1.0/24 100.64.0.0/10
+    hosts deny = ALL
+
+[SecureShare]
+    # Description of the specific share
+    comment = Isolated Secure Shared Folder
+    
+    # Absolute target path of the shared folder
+    path = /home/yourusername/SharedFolder
+    
+    # Allows connected users to write and modify files
+    writable = yes
+    
+    # Visible to network exploration tools on authorized devices
+    browseable = yes
+    
+    # Strips anonymous, passwordless connections completely
+    guest ok = no
+    
+    # Permits everyone in smbgroup and shareuser explicitly
+    valid users = @smbgroup shareuser
+    
+    # New files receive read/write permissions for user and group only
+    create mask = 0660
+    
+    # New folders receive read/write/execute permissions for user and group only
+    directory mask = 0770
+```
+  19. Permanently opens SMB ports in Fedora's firewalld `sudo firewall-cmd --permanent --add-service=samba`
+  20. Applies the firewall policy alterations instantly `sudo firewall-cmd --reload`
+  21. Forces the Samba services to start now and run automatically at every boot `sudo systemctl enable --now smb nmb`
+  22. Verifies the syntax integrity of your smb.conf file to check for configuration typos `testparm`
+  23. Forces a structural restart of the servers to read any profile changes `sudo systemctl restart smb nmb`
+  24. Check the active status of the server if troubleshooting execution `sudo systemctl status smb`
+
+
 ## AI Tools and repos
 -  Video2QS
 
