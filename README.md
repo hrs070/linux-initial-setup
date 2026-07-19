@@ -239,6 +239,11 @@ backspace = C-backspace
   2. Create a username,password
   3. On Client (Windows App), enter the IP of linux machine.
   4. When entering username, enter `.\{username}` and `password`
+  5. If there is still issue, Right-click or hold the PC tile inside the Windows App and select Export. Save the .rdp configuration file anywhere on your Mac/device.
+  6. Open that exported .rdp file using TextEdit or any text editor.
+  7. Locate this exact line: `use redirection server name:i:0`
+  8. Change the 0 to a 1 so it reads exactly like this: `use redirection server name:i:1`
+  9. Save the file and close the text editor.
 
 ## AI Tools and repos
 -  Video2QS
