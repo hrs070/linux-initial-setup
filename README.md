@@ -236,7 +236,7 @@ backspace = C-backspace
 
 ## Remote Login
   1. Enable from settings.
-  2. Create a username,password
+  2. Create a username, password
   3. On Client (Windows App), enter the IP of linux machine.
   4. When entering username, enter `.\{username}` and `password`
   5. If there is still issue, Right-click or hold the PC tile inside the Windows App and select Export. Save the .rdp configuration file anywhere on your Mac/device.
@@ -316,5 +316,3 @@ compression-algorithm = zstd
 ## //TODO
 -  gsconnect / kdeconnect
 -  steam setup
--  gui for systemctl, firewall: gufw ?
--  rdp
